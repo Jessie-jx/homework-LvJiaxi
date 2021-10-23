@@ -19,10 +19,10 @@ The left screenshot shows the pet list with brief information. The right screens
 ## 📱Try the app
 [Click here to download the apk.](https://github.com/Jessie-jx/homework-LvJiaxi/releases/download/v1.0.0-alpha/PetCare.apk)
 
-## Future improvements
+## 🔜 Future improvements
 Due to time limitation, this app only consists of some basic functions and limited image resources. The following improvements can be implemented in the future.
 * Add more animal catagories and more neccessary information about pets including vaccination, weight and so on;
-* Adding a function for users to upload pet information including filling out forms, taking and uploading photos and even videos;
+* Adding a function for users to upload pet information including filling out forms, taking and uploading photos and even videos. Also removing or marking pets that have already been adopted;
 * UI optimization like Night and day mode switching.
 
 ## 🤝 Credits
