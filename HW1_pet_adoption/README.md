@@ -13,7 +13,7 @@ The left screenshot shows the pet list with brief information. The right screens
 ## 🗝️ Key functions
 * Sliding to see pet list;
 * Clicking each card to reach detailed information;
-* Filtering pet list based on gender and breed.
+* Filtering pet list based on gender and breed by a dropdown list.
 <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW1_pet_adoption/Screenshots/img3.jpg" width="300"/>
 
 ## 📱Try the app
