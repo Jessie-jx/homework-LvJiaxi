@@ -1,7 +1,10 @@
 # Homework 1: Pet Adoption 🐶
 This is the first homework (Chapter 2) of CS175, an pet adoption application.
 
-### Try the app apk here
+## 📱Try the app apk here
+<p>
+  < a href="https://github.com/Spikeysanju/Wiggles/releases/download/v1.0.0-alpha/PetCare.apk"></ a>
+</p>
 
 
 ## 📸 Screenshots
