@@ -16,8 +16,8 @@ The left screenshot shows the pet list with brief information. The right screens
 * Filtering pet list based on gender and breed
 <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW1_pet_adoption/Screenshots/img3.jpg" width="300"/>
 
-## 📱Try the app apk here
-[apk](https://github.com/Spikeysanju/Wiggles/releases/download/v1.0.0-alpha/PetCare.apk)
+## 📱Try the app
+[Click to download the apk](https://github.com/Jessie-jx/homework-LvJiaxi/releases/download/v1.0.0-alpha/PetCare.apk)
 
 ## 🤝 Credits
 All the images come from internet. Thanks!
