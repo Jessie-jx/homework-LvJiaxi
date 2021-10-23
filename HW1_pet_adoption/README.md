@@ -1,1 +1,1 @@
-# Homework1-Pet Adoption
+# Homework 1: Pet Adoption
