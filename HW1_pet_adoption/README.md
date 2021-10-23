@@ -3,10 +3,11 @@ This is the first homework (Chapter 2) of CS175, an pet adoption application.
 
 ## 📸 Screenshots
 The left screenshot shows the pet list with brief information. The right screenshot shows detailed introduction about the pet.
-<figure class="third">
-  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW1_pet_adoption/Screenshots/img1.jpg" width="300"/><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW1_pet_adoption/Screenshots/img2.jpg" width="300"/>
-    </figure>
 
+<p float="left">
+  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW1_pet_adoption/Screenshots/img1.jpg" width="300"/>
+  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW1_pet_adoption/Screenshots/img2.jpg" width="300"/>
+</p>
 
 
 ## 🗝️ Key functions
