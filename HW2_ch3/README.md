@@ -11,9 +11,12 @@ The left screenshot shows the pet list with brief information. The right screens
 
 <table>
     <tr>
-        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_1.gif" width="200" >Exercise 1 </center></td>
-        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_2.gif" width="200" >Exercise 2</center></td>
-        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_3.gif" width="200" >Exercise 3</center></td>
+        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_1.gif" width="200" >
+            Exercise 1 </center></td>
+        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_2.gif" width="200" >
+            Exercise 2</center></td>
+        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_3.gif" width="200" >
+            Exercise 3</center></td>
     </tr>
 </table>
 
