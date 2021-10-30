@@ -24,7 +24,7 @@ When checkbox is ticked, the animation plays automatically. When checkbox is not
 
 
 ## 📱Try the app
-[Click here to download the apk.](https://github.com/Jessie-jx/homework-LvJiaxi/releases/download/v1.0.0-alpha/PetCare.apk)
+[Click here to download the apk.](https://github.com/Jessie-jx/homework-LvJiaxi/raw/main/HW2_ch3/release/app-release.apk)
 
 ## 🔜 Future improvements
 Due to time limitation, this app only consists of some basic functions and limited image resources. The following improvements can be implemented in the future.
