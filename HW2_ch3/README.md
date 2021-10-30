@@ -10,8 +10,9 @@ This is the second homework (Chapter 3) of CS175, some exercises about android a
 The left screenshot shows the pet list with brief information. The right screenshot shows detailed introduction about the pet.
 
 <p float="left">
-  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW1_pet_adoption/Screenshots/img1.jpg" width="300"/>
-  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW1_pet_adoption/Screenshots/img2.jpg" width="300"/>
+  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_1.gif" width="200"/>
+  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_2.gif" width="200"/>
+  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_3.gif" width="200"/>
 </p>
 
 ## 📱Try the app
