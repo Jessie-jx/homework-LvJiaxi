@@ -5,6 +5,8 @@ This is the second homework (Chapter 3) of CS175, some exercises about android a
 ### Exercise 1: Lottie Animation
 When checkbox is ticked, the animation plays automatically. When checkbox is not clicked, the animation can be manually controlled by dragging the seek bar.
 ### Exercise 2: Property animation about alpha and scale
+* ObjectAnimator: Define animations by specific property names (e.g. "alpha", "scaleX", "scaleY");
+* AnimatorSet: play animators together.
 ### Exercise 3: Create an simple address book
 
 ## 📽️ Video Clips
