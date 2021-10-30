@@ -6,12 +6,14 @@ This is the second homework (Chapter 3) of CS175, some exercises about android a
 When checkbox is ticked, the animation plays automatically. When checkbox is not clicked, the animation can be manually controlled by dragging the seek bar.
 ### Exercise 2: Property animation about alpha and scale
 * ObjectAnimator: Define animations by specific property names (e.g. "alpha", "scaleX", "scaleY");
-* AnimatorSet: play animators together.
+* AnimatorSet: Play animators together.
 ### Exercise 3: Create an simple address book
+* ViewPager & Fragment: Create a sliding interface;
+* Tablayout: Choose pages by tabbing the tool bar;
+* RecyclerView: A sliding address book in the first page;
+* ObjectAnimator: Achieve loading effect with animation fading out.
 
 ## 📽️ Video Clips
-The left screenshot shows the pet list with brief information. The right screenshot shows detailed introduction about the pet.
-
 <table>
     <tr>
         <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_1.gif" width="200" > </center></td>
