@@ -2,14 +2,14 @@
 This is the second homework (Chapter 3) of CS175, some exercises about android animation.
 
 ## 🗝️ Introduction
-* Sliding to see pet list;
-* Clicking each card to reach detailed information;
-* Filtering pet list based on gender and breed by a dropdown list.
+### Exercise 1: Lottie Animation
+### Exercise 2: Property animation about alpha and scale
+### Exercise 3: Create an simple address book
 
 ## 📽️ Video Clips
 The left screenshot shows the pet list with brief information. The right screenshot shows detailed introduction about the pet.
 
-<p float="center">
+<p float="left">
   <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_1.gif" width="200"/>
   <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_2.gif" width="200"/>
   <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_3.gif" width="200"/>
