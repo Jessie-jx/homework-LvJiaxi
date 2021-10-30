@@ -11,20 +11,12 @@ The left screenshot shows the pet list with brief information. The right screens
 
 <table>
     <tr>
-        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_1.gif" width="200" >
-            Exercise 1 </center></td>
-        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_2.gif" width="200" >
-            Exercise 2</center></td>
-        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_3.gif" width="200" >
-            Exercise 3</center></td>
+        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_1.gif" width="200" > </center></td>
+        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_2.gif" width="200" > </center></td>
+        <td ><center><img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_3.gif" width="200" > </center></td>
     </tr>
 </table>
 
-<p float="left">
-  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_1.gif" width="200"/>
-  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_2.gif" width="200"/>
-  <img src="https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW2_ch3/Clips/hw3_3.gif" width="200"/>
-</p>
 
 ## 📱Try the app
 [Click here to download the apk.](https://github.com/Jessie-jx/homework-LvJiaxi/releases/download/v1.0.0-alpha/PetCare.apk)
