@@ -26,4 +26,5 @@ When checkbox is ticked, the animation plays automatically. When checkbox is not
 ## 📱Try the app
 [Click here to download the apk.](https://github.com/Jessie-jx/homework-LvJiaxi/raw/main/HW2_ch3/release/app-release.apk)
 
-At last, thank the engineers from ByteDance for designing the wonderful homework!
+## At last
+Thank the engineers from ByteDance for designing the wonderful homework!
