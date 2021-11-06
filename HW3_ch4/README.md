@@ -9,3 +9,4 @@ This is the third homework (Chapter 4) of CS175, an clock application.
 </p>
 
 ## Try the app
+[Click here to download the apk.](https://github.com/Jessie-jx/homework-LvJiaxi/blob/main/HW3_ch4/app/release/app-release.apk)
