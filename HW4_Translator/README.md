@@ -1,5 +1,5 @@
 # Homework 4: An Dictionary
-This is the third homework (Chapter 5) of CS175, an dictionary application.
+This is the fourth homework (Chapter 5) of CS175, an dictionary application.
 
 ## Functions:
 ### Searching
