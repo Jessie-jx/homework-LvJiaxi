@@ -11,7 +11,7 @@ This is the fourth homework (Chapter 5) of CS175, an dictionary application.
 * Clicking on historical records area, it can also jump to the detail page;
 
 ### Network traffic
-* Proxy network requests through Charles and inspect data midstream;
+* Proxy network requests through Charles and inspect data midstream; (File directory is /Charles/youdao.chls)
 
 
 ## Demo
