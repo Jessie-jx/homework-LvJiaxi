@@ -80,6 +80,8 @@ class VideoActivity : AppCompatActivity() {
             override fun run() {
                 try {
                     mySeekbar.progress = player.currentPosition
+                    progress_text.text =
+                        convertTime(player.currentPosition) + "/" + convertTime(player.duration)
                     handler.postDelayed(this, 1000)
 
                 } catch (e: IOException) {
@@ -89,6 +91,13 @@ class VideoActivity : AppCompatActivity() {
 
         }, 0)
 
+    }
+
+    private fun convertTime(msec: Int): String {
+        var sec: Int = msec / 1000
+        val min: Int = sec / 60
+        sec = sec - 60 * min
+        return min.toString().padStart(2, '0') + ":" + sec.toString().padStart(2, '0')
     }
 
 
