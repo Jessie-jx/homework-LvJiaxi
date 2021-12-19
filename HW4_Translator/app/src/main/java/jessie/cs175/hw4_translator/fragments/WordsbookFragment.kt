@@ -13,20 +13,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import jessie.cs175.hw4_translator.R
 import jessie.cs175.hw4_translator.adapter.MyRecyclerviewAdapter
-import android.animation.AnimatorSet
 
-import android.animation.ObjectAnimator
+import android.content.ContentValues
 import android.content.Intent
 import android.util.Log
+import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.ItemTouchHelper
-import jessie.cs175.hw4_translator.WordDetail
-import jessie.cs175.hw4_translator.WordDetailActivity
+import com.google.android.material.snackbar.Snackbar
+import jessie.cs175.hw4_translator.model.WordDetail
+import jessie.cs175.hw4_translator.activities.WordDetailActivity
+import jessie.cs175.hw4_translator.adapter.SwipeToDeleteCallback
 import java.io.Serializable
 import java.util.ArrayList
 
 
 class WordsbookFragment : Fragment(), CellClickListener {
-    private var animatorSet2: AnimatorSet? = null
     var uri: Uri = Uri.parse("content://jessie.cs175.hw4_translator.db.provider/WordBook")
     private lateinit var adapter: MyRecyclerviewAdapter
 
@@ -34,6 +35,7 @@ class WordsbookFragment : Fragment(), CellClickListener {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.layout_wordsbook, container, false)
+        val showMeaningBtn = view.findViewById<SwitchCompat>(R.id.show_switch)
 
         adapter = MyRecyclerviewAdapter(getAllItems(), this)
         val wordbookRecyclerview = view.findViewById<RecyclerView>(R.id.word_book_list)
@@ -42,62 +44,65 @@ class WordsbookFragment : Fragment(), CellClickListener {
         wordbookRecyclerview.layoutManager = LinearLayoutManager(activity as Context)
         wordbookRecyclerview.adapter = adapter
 
+        val swipeHandler = object : SwipeToDeleteCallback(activity as Context) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                val adapter = recyclerView.adapter as SimpleAdapter
+                val deletedWord = adapter.removeAt(viewHolder.adapterPosition)
+
+                val cv = ContentValues()
+                cv.put("deleted", 1)
+                requireActivity().contentResolver.update(uri, cv, "word = ?", arrayOf(deletedWord))
+
+                adapter.swapCursor(getAllItems())
+                if (deletedWord != null) {
+                    Snackbar.make(view, deletedWord, Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.undo), object : View.OnClickListener {
+                            override fun onClick(v: View?) {
+                                val cv = ContentValues()
+                                cv.put("deleted", 0)
+                                requireActivity().contentResolver.update(
+                                    uri,
+                                    cv,
+                                    "word = ?",
+                                    arrayOf(deletedWord)
+                                )
+                                adapter.swapCursor(getAllItems())
+                            }
+
+                        }).show()
+                }
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(wordbookRecyclerview)
+
+        showMeaningBtn.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                adapter.isMeaningHidden = false
+                adapter.notifyDataSetChanged()
+            } else {
+                adapter.isMeaningHidden = true
+                adapter.notifyDataSetChanged()
+            }
+        }
 
 
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
-        view?.postDelayed(object : Runnable {
-            override fun run() {
-                val lottie_alpha = ObjectAnimator.ofFloat(
-                    view!!.findViewById(R.id.loading_lottie),
-                    "alpha",
-                    1f,
-                    0f
-                )
-                lottie_alpha.duration = 1000
-                lottie_alpha.repeatCount = 0
-
-                val wordbook_alpha =
-                    ObjectAnimator.ofFloat(
-                        view!!.findViewById(R.id.word_book_list),
-                        "alpha",
-                        0f,
-                        1f
-                    )
-                wordbook_alpha.duration = 1000
-                wordbook_alpha.repeatCount = 0
-
-                animatorSet2 = AnimatorSet()
-                animatorSet2!!.playSequentially(lottie_alpha, wordbook_alpha)
-                animatorSet2!!.start()
-            }
-
-        }, 3000)
-    }
 
     override fun onResume() {
         super.onResume()
         adapter.swapCursor(getAllItems())
     }
 
-//    override fun onCellClickListener(word: String) {
-////        wordInfo=
-////        val intent = Intent(activity, WordDetailActivity::class.java)
-////        intent.putExtra("wordInfo", wordInfo as Serializable)
-////        startActivity(intent)
-//    }
 
     private fun getAllItems(): Cursor? {
         return requireActivity().contentResolver.query(
             uri,
-            arrayOf("_id", "word", "usphone"),
-            null,
-            null,
+            arrayOf("_id", "word", "usphone", "meanings"),
+            "star = ? AND deleted = ?",
+            arrayOf("1","0"),
             null
         )
     }
@@ -129,23 +134,23 @@ class WordsbookFragment : Fragment(), CellClickListener {
         val examType: String? = singleCursor!!.getString(5)
 
         val meanings: ArrayList<String> = ArrayList()
-        if (singleCursor!!.getString(6)==""){
-            Log.d("@=>Translator","No meaning")
-        }else{
+        if (singleCursor!!.getString(6) == "") {
+            Log.d("@=>Translator", "No meaning")
+        } else {
             meanings.add(singleCursor!!.getString(6))
         }
 
         val changes: ArrayList<String> = ArrayList()
-        if (singleCursor!!.getString(7)==""){
-            Log.d("@=>Translator","No changes")
-        }else{
+        if (singleCursor!!.getString(7) == "") {
+            Log.d("@=>Translator", "No changes")
+        } else {
             changes.add(singleCursor!!.getString(7))
         }
 
         val sentences: ArrayList<String> = ArrayList()
-        if (singleCursor!!.getString(8)==""){
-            Log.d("@=>Translator","No sentences")
-        }else{
+        if (singleCursor!!.getString(8) == "") {
+            Log.d("@=>Translator", "No sentences")
+        } else {
             sentences.add(singleCursor!!.getString(8))
         }
 

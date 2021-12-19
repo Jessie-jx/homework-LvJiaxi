@@ -1,3 +1,23 @@
 <resources>
-    <string name="app_name">HW4_Translator</string>
+    <string name="app_name">今生是第一次</string>
+    <string name="hint_name">姓名</string>
+    <string name="hint_email">邮箱</string>
+    <string name="hint_password">密码</string>
+    <string name="hint_confirm_password">确认密码</string>
+    <string name="text_login">登录</string>
+    <string name="text_register">注册</string>
+    <string name="error_message_name">请输入姓名</string>
+    <string name="error_message_email">请输入有效的邮箱格式</string>
+    <string name="error_message_password">请输入密码</string>
+    <string name="success_message">注册成功！</string>
+    <string name="text_not_member">还没有账号？点击注册</string>
+    <string name="text_already_member">已有账号？点击登录</string>
+    <string name="error_email_exists">该邮箱已被注册</string>
+    <string name="error_password_match">两次密码输入不一致</string>
+    <string name="error_valid_email_password">登录邮箱或密码有误</string>
+    <string name="undo">撤销</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="classic_sentence">"Some of us get dipped in flat, some in satin, some in gloss.... But every once in a while, you find someone who's iridescent, and when you do, nothing will ever compare."</string>
 </resources>

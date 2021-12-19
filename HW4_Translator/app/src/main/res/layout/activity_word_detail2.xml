@@ -5,27 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WordDetailActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/my_toolbar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-    </com.google.android.material.appbar.AppBarLayout>
+    tools:context=".activities.WordDetailActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/basic_info_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:backgroundTint="@color/secondaryColor"
+        app:cardElevation="5dp"
         app:cardCornerRadius="10dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,15 +29,32 @@
                     android:layout_height="wrap_content"
                     android:textSize="30dp"
                     android:textStyle="bold"
-                    android:textColor="#FF354b69"
+                    android:textColor="@color/MyTextColor"
+                    android:layout_gravity="center_vertical"
                     android:text="word"/>
 
                 <ToggleButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:id="@+id/btn_addToWordBook"
-                    android:text="add"
+                    android:background="@android:drawable/btn_star"
+                    android:checked="false"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn=""
                     android:layout_marginLeft="20dp"/>
+
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/btn_addToWordBook"-->
+<!--                    android:layout_width="60dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:src="@android:drawable/btn_star"-->
+<!--                    android:state_checked="true"-->
+<!--                    android:state_pressed="true"-->
+<!--                    android:layout_alignParentBottom="true"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:background="#00ffffff" />-->
             </LinearLayout>
 
 
@@ -77,7 +82,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/audio2"/>
+                    android:src="@drawable/ic_baseline_headset_24"/>
             </LinearLayout>
 
         </LinearLayout>

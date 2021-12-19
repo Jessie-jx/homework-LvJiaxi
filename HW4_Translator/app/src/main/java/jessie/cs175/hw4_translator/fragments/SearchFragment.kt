@@ -1,7 +1,10 @@
 package jessie.cs175.hw4_translator.fragments
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import java.text.SimpleDateFormat
 import java.util.*
 import retrofit2.Callback
@@ -19,62 +21,59 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.Serializable
-import java.util.*
-import android.net.http.HttpResponseCache
+import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.json.dict.JsonRootBean
+import com.bumptech.glide.Glide
 import jessie.cs175.hw4_translator.*
+import jessie.cs175.hw4_translator.activities.WordDetailActivity
+import jessie.cs175.hw4_translator.adapter.HistoryRecyclerviewAdapter
+import jessie.cs175.hw4_translator.model.WordDetail
+import jessie.cs175.hw4_translator.util.TimeConsumeInterceptor
+import jessie.cs175.hw4_translator.util.YoudaoServiceComplex
 import okhttp3.*
 import okhttp3.EventListener
-import java.io.File
-import okhttp3.CacheControl
-import java.io.IOException
-import java.util.concurrent.TimeUnit
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), CellClickListener2 {
+    var uri: Uri = Uri.parse("content://jessie.cs175.hw4_translator.db.provider/WordBook")
     var showText: TextView? = null
+    private lateinit var historyAdapter: HistoryRecyclerviewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.layout_search, container, false)
 
+        historyAdapter = HistoryRecyclerviewAdapter(getHistoryItems(), this)
+        val historyWordsView = view.findViewById<RecyclerView>(R.id.history_words)
+
+
+        historyWordsView.layoutManager = LinearLayoutManager(activity as Context)
+        historyWordsView.adapter = historyAdapter
+
         showText = view.findViewById(R.id.show_text)
         val editText = view.findViewById<EditText>(R.id.input)
         var dateString = view.findViewById<TextView>(R.id.date)
         var dailySentence = view.findViewById<TextView>(R.id.daily_sentence)
         var dailyImage = view.findViewById<ImageView>(R.id.daily_img)
-        var historyWordsView = view.findViewById<ListView>(R.id.history_words)
+//        var historyWordsView = view.findViewById<ListView>(R.id.history_words)
         val clearBtn = view.findViewById<Button>(R.id.clear_btn)
 
         val sdf = SimpleDateFormat("yyyy/MM/dd")
         val currentDate = sdf.format(Date())
 
         dateString.text = "每日一句  $currentDate"
-        dailySentence.text =
-            "Some of us get dipped in flat, some in satin, some in gloss.... But every once in a while, you find someone who's iridescent, and when you do, nothing will ever compare."
-        dailyImage.setImageResource(R.drawable.flipped)
+        dailySentence.text =getString(R.string.classic_sentence)
 
-//        var historyWords: Queue<String> = LinkedList<String>()
-        var historyWords: ArrayList<String> = arrayListOf<String>()
+//        dailyImage.setImageResource(R.drawable.flipped)
+        Glide.with(this).load("https://upload-images.jianshu.io/upload_images/7355246-6a1fe015aa748507.JPG").into(dailyImage)
 
-        val adapter =
-            ArrayAdapter(activity as Context, android.R.layout.simple_list_item_1, historyWords)
-        historyWordsView.adapter = adapter
 
         // 输入框输入单词
         editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 showText?.text = ""
-
-                // 修改历史记录
-                if (editText.text.toString() in historyWords) {
-                    historyWords.remove(editText.text.toString())
-                }
-                if (historyWords.size == HISTORY_WORDS_LIMIT) {
-                    historyWords.remove(historyWords[historyWords.size - 1])
-                }
-                historyWords.add(0, editText.text.toString())
-                adapter.notifyDataSetChanged()
 
                 //进行url单词查询
                 click(editText.text.toString())
@@ -84,15 +83,6 @@ class SearchFragment : Fragment() {
             false
         })
 
-        // 查询历史记录中的单词
-        historyWordsView.setOnItemClickListener { parent, view, position, id ->
-            showText?.text = ""
-            val researchWord = historyWords[position]
-            click(researchWord)
-            historyWords.remove(researchWord)
-            historyWords.add(0, researchWord)
-            adapter.notifyDataSetChanged()
-        }
 
         // 清空输入框
         clearBtn.setOnClickListener {
@@ -119,6 +109,11 @@ class SearchFragment : Fragment() {
 
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        historyAdapter.swapCursor(getHistoryItems())
     }
 
     val okhttpListener = object : EventListener() {
@@ -151,8 +146,6 @@ class SearchFragment : Fragment() {
 
     fun request(callback: retrofit2.Callback<JsonRootBean>, word: String) {
         try {
-//            val YoudaoService = retrofit.create(YoudaoService::class.java)
-//            YoudaoService.getWordMeaning(word,1,"json").enqueue(callback)
 
             val YoudaoServiceComplex = retrofit.create(YoudaoServiceComplex::class.java)
             YoudaoServiceComplex.getWordInfo(word).enqueue(callback)
@@ -228,6 +221,46 @@ class SearchFragment : Fragment() {
                         word, usphone, ukphone, audiourl, examType,
                         meanings, changes, sentences
                     )
+
+                    val values = ContentValues()
+                    val cursor: Cursor? = requireActivity().contentResolver?.query(
+                        uri,
+                        arrayOf("_id", "word"),
+                        "word=?",
+                        arrayOf("${wordInfo.word}"),
+                        null
+                    )
+
+                    if (cursor!!.moveToFirst()) {
+                        Log.d("@=>Translator", "${wordInfo.word} record exists")
+                    } else {
+                        values.put("word", wordInfo.word)
+                        values.put("usphone",wordInfo.usphone)
+                        values.put("ukphone",wordInfo.ukphone)
+                        values.put("audiourl",wordInfo.audiourl)
+                        values.put("examType",wordInfo.examType)
+                        if (wordInfo.meanings.size == 0){
+                            values.put("meanings","")
+                        } else{
+                            values.put("meanings",wordInfo.meanings.get(0))
+                        }
+
+                        if (wordInfo.changes.size == 0){
+                            values.put("changes","")
+                        } else{
+                            values.put("changes",wordInfo.changes.get(0))
+                        }
+
+                        if (wordInfo.sentences.size == 0){
+                            values.put("sentences","")
+                        } else{
+                            values.put("sentences",wordInfo.sentences.get(0))
+                        }
+
+                        requireActivity().contentResolver.insert(uri, values)
+                        Log.d("@=>Translator", "${wordInfo.word} add successfully")
+                    }
+
                     val intent = Intent(activity, WordDetailActivity::class.java)
                     intent.putExtra("wordInfo", wordInfo as Serializable)
                     startActivity(intent)
@@ -244,4 +277,23 @@ class SearchFragment : Fragment() {
 
     }
 
+    private fun getHistoryItems(): Cursor? {
+        return requireActivity().contentResolver.query(
+            uri,
+            arrayOf("_id", "word"),
+            null,
+            null,
+            "_id DESC"
+        )
+    }
+
+    override fun onCellClickListener(word: String) {
+        click(word)
+    }
+
 }
+
+interface CellClickListener2 {
+    fun onCellClickListener(word: String)
+}
+

@@ -8,25 +8,28 @@ import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.util.Log
 
-class WordBookProvider:ContentProvider() {
+class WordBookProvider : ContentProvider() {
 
     val AUTOHORITY = "jessie.cs175.hw4_translator.db.provider"
-    val Table_Code = 1
+    val Word_Table_Code = 1
+    val User_Table_Code = 2
     lateinit var db: SQLiteDatabase
     private var mMatcher: UriMatcher? = null
 
     init {
         mMatcher = UriMatcher(UriMatcher.NO_MATCH)
-        mMatcher?.addURI(AUTOHORITY, "WordBook", Table_Code)
+        mMatcher?.addURI(AUTOHORITY, "WordBook", Word_Table_Code)
+        mMatcher?.addURI(AUTOHORITY, "UserTable", User_Table_Code)
     }
 
     override fun onCreate(): Boolean {
-        Log.d("@=>Translator","$this onCreate")
+        Log.d("@=>Translator", "$this onCreate")
         val mDbHelper = DBHelper(context!!)
         db = mDbHelper.writableDatabase
 
         return true
     }
+
 
     override fun query(
         uri: Uri,
@@ -41,7 +44,8 @@ class WordBookProvider:ContentProvider() {
 
     override fun getType(uri: Uri): String? {
         when (mMatcher!!.match(uri)) {
-            Table_Code -> return "type_table"
+            Word_Table_Code -> return "type_wordbook"
+            User_Table_Code -> return "type_user"
         }
         return ""
     }
@@ -55,7 +59,7 @@ class WordBookProvider:ContentProvider() {
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
         val table: String = getTableName(uri)
-        db.delete(table,selection,selectionArgs)
+        db.delete(table, selection, selectionArgs)
         return 0
     }
 
@@ -66,15 +70,18 @@ class WordBookProvider:ContentProvider() {
         selectionArgs: Array<out String>?
     ): Int {
         val table: String = getTableName(uri)
-        db.update(table,values,selection,selectionArgs)
+        db.update(table, values, selection, selectionArgs)
         return 0
     }
 
     private fun getTableName(uri: Uri): String {
         var tableName = ""
         when (mMatcher!!.match(uri)) {
-            Table_Code -> tableName = DBHelper.TABLE_NAME
+            Word_Table_Code -> tableName = DBHelper.WORDS_TABLE_NAME
+            User_Table_Code -> tableName = DBHelper.USER_TABLE_NAME
         }
         return tableName
     }
+
+
 }

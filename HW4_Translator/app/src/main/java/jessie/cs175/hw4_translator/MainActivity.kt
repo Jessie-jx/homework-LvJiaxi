@@ -24,7 +24,9 @@ import android.net.http.HttpResponseCache
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import jessie.cs175.hw4_translator.adapter.ViewPagerAdapter
+import jessie.cs175.hw4_translator.db.AppPreferences
 import jessie.cs175.hw4_translator.fragments.MyFragment
+import jessie.cs175.hw4_translator.fragments.RootFragment
 import jessie.cs175.hw4_translator.fragments.SearchFragment
 import jessie.cs175.hw4_translator.fragments.WordsbookFragment
 import okhttp3.*
@@ -45,6 +47,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        AppPreferences.init(this)
+
         val viewPager = findViewById<ViewPager>(R.id.viewPager)
 
         val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
@@ -60,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         // is a title of tab
         adapter.addFragment(SearchFragment(), "查词")
         adapter.addFragment(WordsbookFragment(), "生词本")
-        adapter.addFragment(MyFragment(), "我的")
+        adapter.addFragment(RootFragment(), "我的")
 
         // setting adapter to view pager.
         viewpager.setAdapter(adapter)
